@@ -6,6 +6,8 @@ from io import StringIO
 import numpy as np
 import re
 
+# Values are stored in a config file locally
+
 boardBase = config.boardBase
 organizationBase = config.organizationBase
 organizationParams = config.organizationParams
@@ -23,6 +25,7 @@ comments_included = config.comments_included
 included_org = config.included_org
 
 
+# An inline function used downstream to convert csv to buffer
 def getBuffer(df):
     textStream = StringIO()
     df.to_csv(textStream, header=False, index=False)
@@ -399,19 +402,6 @@ def collectFieldOptions(flds):
     return option_frame
 
 
-def tempBoard():
-    temp = []
-    temp.append(
-        {
-            "board_id": "5ba4e05a61a70d2da1c1cea0",
-            "board_comment": True,
-            "board_included": True,
-        }
-    )
-    df = pd.DataFrame(temp)
-    return df
-
-
 # validboard = collectBoards(orgs=included_org)
 # validlist = collectLists(brds=validboard)
 # validmember = collectMembers(brds=validboard)
@@ -422,21 +412,3 @@ def tempBoard():
 # checklist = collectCheckLists(brds=validboard)
 # field = collectCardFields(brds=tempBoard())
 # fieldoption = collectFieldOptions(flds=validfield)
-
-# print(field)
-
-
-def execute_values(df):
-    """
-    Using psycopg2.extras.execute_values() to insert the dataframe
-    """
-    # Create a list of tupples from the dataframe values
-    tuples = [tuple(x) for x in df.to_numpy()]
-    # Comma-separated dataframe columns
-    cols = ",".join(list(df.columns))
-    # SQL quert to execute
-    query = "INSERT INTO %s(%s) VALUES %%s" % ("comment", cols)
-    return tuples
-
-
-# print(execute_values(field))
