@@ -1,1 +1,9 @@
 config.py
+Scripts
+Lib
+site-packages
+pyvenv.cfg
+setuptools
+pkg_resources
+pip
+.venv
