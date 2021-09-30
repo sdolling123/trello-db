@@ -1,2 +1,2 @@
 # trello-db
-Holds code for Trello data pull
+This repo maintains the source code for pulling data from Trello, cleaning it, and uploading it to a Postgres database.
