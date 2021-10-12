@@ -7,3 +7,5 @@ setuptools
 pkg_resources
 pip
 .venv
+functionsProcedure.sql
+scratch.py
