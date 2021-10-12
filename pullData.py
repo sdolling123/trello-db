@@ -107,8 +107,6 @@ def collectBoards(orgs):
     board_frame["board_closed"] = board_frame["board_closed"].astype("bool")
     board_frame["board_included"] = board_frame["board_included"].astype("bool")
     board_frame["board_comment"] = board_frame["board_comment"].astype("bool")
-    board_frame["schema_name"] = board_frame["schema_name"].fillna(np.nan)
-    board_frame["schema_name"] = board_frame["schema_name"].replace({np.nan: None})
     return board_frame
 
 
@@ -276,8 +274,8 @@ def validMemberDataPull(board_pull):
                     "member_username": element["username"],
                 }
             )
-    member_frame = pd.DataFrame(full_list).drop_duplicates(inplace=False)
     member_frame = pd.DataFrame(full_list)
+    member_frame = pd.DataFrame(full_list).drop_duplicates(inplace=False)
     return member_frame
 
 
